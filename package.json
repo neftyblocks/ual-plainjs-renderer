@@ -1,5 +1,5 @@
 {
-  "name": "ual-nefty-renderer",
+  "name": "@nefty/ual-renderer",
   "version": "0.1.1",
   "author": {
     "name": "block.one",
