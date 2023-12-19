@@ -125,12 +125,7 @@ export class AuthButton extends UALJsAbstractBaseComponent {
       LIGHT_GREY: '#D5D8E2',
     }
 
-    let stateIconHtml = `
-    <i
-      class="fa fa-chevron-right"
-      style="float: right; padding: 8px; font-size: 1.5em; color: ${authenticator.getStyle().textColor}"
-      aria-hidden="true">
-    </i>`
+    let stateIconHtml = ''
 
     if (!showDownload) {
       if (authenticator.isLoading()) {
@@ -144,12 +139,7 @@ export class AuthButton extends UALJsAbstractBaseComponent {
       }
 
       if (authenticator.isErrored()) {
-        stateIconHtml = `
-      <i
-        class="fa fa-exclamation-circle"
-        style="float:right; padding: 12px; font-size: 1.5rem; color: ${authenticator.getStyle().textColor}"
-        aria-hidden="true">
-      </i>`
+        stateIconHtml = ''
 
         background = errorColors.LIGHT_GREY
         textColor = errorColors.DARK_GREY
@@ -161,12 +151,7 @@ export class AuthButton extends UALJsAbstractBaseComponent {
       toolTipClass = authenticator.isErrored() ? 'tippy-binding' : ''
 
     } else {
-      stateIconHtml = `
-      <i
-        class="fa fa-download"
-        style="float: right; padding: 8px; font-size: 1.5em; color: ${authenticator.getStyle().textColor}"
-        aria-hidden="true">
-      </i>`
+      stateIconHtml = ''
     }
 
     const buttonHtml = `

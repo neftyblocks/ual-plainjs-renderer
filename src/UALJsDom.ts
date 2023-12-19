@@ -5,12 +5,6 @@ import { DownloadAuthenticatorModal } from './components/DownloadAuthenticatorMo
 import { GetAuthenticatorModal } from './components/GetAuthenticatorModal'
 import { MessageModal, MessageTypes, ModalMessage } from './components/MessageModal'
 
-declare global {
-  interface Window {
-    tippy: (e: any, t: any, r: any | null) => void
-  }
-}
-
 type UserLoginCallback = (authenticator: Authenticator, accountName: string | undefined) => void
 
 /**
@@ -54,31 +48,6 @@ export class UALJsDom {
    * element may not be available at initialization
    */
   public generateUIDom() {
-    const faStylesheet = document.createElement('link') as HTMLLinkElement
-    faStylesheet.rel = 'stylesheet'
-    faStylesheet.href = 'https://use.fontawesome.com/releases/v5.6.3/css/all.css'
-    faStylesheet.integrity = 'sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/'
-    faStylesheet.crossOrigin = 'anonymous'
-
-    this.containerElement.appendChild(faStylesheet as HTMLElement)
-
-    const tippyJs = document.createElement('script') as HTMLScriptElement
-    tippyJs.src = 'https://unpkg.com/tippy.js@3.4.1/dist/tippy.all.min.js'
-
-    this.containerElement.appendChild(tippyJs)
-
-    const tippyStylesheet = document.createElement('link') as HTMLLinkElement
-    tippyStylesheet.rel = 'stylesheet'
-    tippyStylesheet.href = 'https://unpkg.com/tippy.js@3.4.1/dist/tippy.css'
-
-    this.containerElement.appendChild(tippyStylesheet as HTMLElement)
-
-    const lightTippyStylesheet = document.createElement('link') as HTMLLinkElement
-    lightTippyStylesheet.rel = 'stylesheet'
-    lightTippyStylesheet.href = 'https://unpkg.com/tippy.js@3.4.1/dist/themes/light.css'
-
-    this.containerElement.appendChild(lightTippyStylesheet as HTMLElement)
-
     const button = this.createButton()
     const buttonStyles = this.createButtonStyles(this.buttonStyleOverride)
 
@@ -92,19 +61,6 @@ export class UALJsDom {
 
     this.containerElement.appendChild(authenticationModalStyles)
     this.containerElement.appendChild(this.authenticatorModal)
-
-    // bind any tooltips on buttons, tippy loads asychronously and may not be initially available
-    const interval = setInterval(() => {
-      if (!!window.tippy) {
-        window.tippy(this.containerElement, {
-          target: '.tippy-binding',
-          theme: 'light',
-          arrow: 'true',
-          size: 'large'
-        }, null)
-        clearInterval(interval)
-      }
-    }, 50)
 
     // starts a cyclical redraw of the authenticator buttons
     // so if state change occurs they redraw
